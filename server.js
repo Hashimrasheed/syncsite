@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3000
 
 const app = express();
 app.use(express.static('public'))
-console.log(PASSWORD);
 //database connection
 const url = `mongodb+srv://${USER_NAME}:${PASSWORD}@cluster0.wysex.mongodb.net/HalfwayTest?retryWrites=true&w=majority`;
 
@@ -35,3 +34,5 @@ app.use('/', restaurants);
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
 })
+
+module.exports = app

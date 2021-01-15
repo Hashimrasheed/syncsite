@@ -20,7 +20,7 @@ function restaurants() {
                     res.json({ status: "No restaurants exist" })
                 }
             } catch (e) {
-                res.json("something went wrong")
+                res.json(["something went wrong"])
             }
         },
         // Get a restaurant details
@@ -34,7 +34,7 @@ function restaurants() {
                     res.json({ status: "Restaurant not exist" })
                 }
             } catch (e) {
-                res.json('Something went wrong')
+                res.json(['Something went wrong'])
             }
         },
         // Create a restaurant
