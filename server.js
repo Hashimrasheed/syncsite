@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000
 const app = express();
 app.use(express.static('public'))
 //database connection
-const url = `mongodb+srv://${USER_NAME}:${PASSWORD}@cluster0.wysex.mongodb.net/HalfwayTest?retryWrites=true&w=majority`;
+const url = `mongodb+srv://Hashim:Hashim@30@cluster0.wysex.mongodb.net/HalfwayTest?retryWrites=true&w=majority`;
 
 mongoose.connect(url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true});
 const connection = mongoose.connection;
