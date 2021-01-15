@@ -6,6 +6,7 @@ const {
 
 function restaurants() {
     return {
+        //get Restaurant grade
         async getrestaurantgrade(req, res) {
             const id = req.params.id
             try {
@@ -20,6 +21,7 @@ function restaurants() {
                 res.json({ status: "Something went wrong" })
             }
         },
+        //get All unique restaurant cuisines
         async cuisines(req, res) {
             try {
                 const cuisines = await getrestaurantCuisines()
@@ -36,6 +38,7 @@ function restaurants() {
                 res.json({ status: 'Something went wrong', Error: e })
             }
         },
+        // Get all restaurants under a cuisine
         async restaurantsInCuisines(req, res) {
             try {
                 const cuisine = req.query.cuisine

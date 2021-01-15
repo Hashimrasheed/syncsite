@@ -1,7 +1,7 @@
 const { set } = require('mongoose')
 const Restaurant = require('../../app/models/restaurant')
 
-
+//Get Restaurant
 function getRestaurants(limit) {
     return Restaurant.aggregate([
         {
@@ -10,14 +10,17 @@ function getRestaurants(limit) {
     ])
 }
 
+// Get a restaurant details
 function getARestaurant(id) {
     return Restaurant.findOne({_id: id})
 }
 
+// check restaurant exist
 function checkRestaurantExist(name) {
     return Restaurant.findOne({name}) || null
 }
 
+// Create a restaurant
 function createRestaurant(restaurant) {
     let res = {
         name: restaurant.Name,
@@ -28,18 +31,22 @@ function createRestaurant(restaurant) {
     return Restaurant.insertMany(res)
 }
 
+// update restaurant address
 function updateRestaurant(id, address) {
     return Restaurant.updateOne({_id: id}, {location: address})
 }
 
+//delete a restaurant
 function deleteRestaurant(id) {
     return Restaurant.deleteOne({_id: id})
 }
 
+//get Restaurant grade
 function getrestaurantgrade(id) {
     return Restaurant.findById(id)
 }
 
+//get All unique restaurant cuisines
 function getrestaurantCuisines() {
     return Restaurant.aggregate([
         {
@@ -48,6 +55,7 @@ function getrestaurantCuisines() {
     ])
 }
 
+// Get all restaurants under a cuisine
 function restaurantsInCuisines(cuisine) {
     return Restaurant.aggregate([
         {
@@ -60,6 +68,7 @@ function restaurantsInCuisines(cuisine) {
 }
 
 
+//Export db functions
 module.exports = {
     getRestaurants,
     getARestaurant,

@@ -9,6 +9,7 @@ const {
 
 function restaurants() {
     return {
+        //Get Restaurant
         async getRestaurants(req, res) {
             try {
                 const limit = req.query.limit || 100
@@ -22,6 +23,7 @@ function restaurants() {
                 res.json("something went wrong")
             }
         },
+        // Get a restaurant details
         async getARestaurant(req, res) {
             let id = req.params.id
             try {
@@ -35,6 +37,7 @@ function restaurants() {
                 res.json('Something went wrong')
             }
         },
+        // Create a restaurant
         async createRestaurant(req, res) {
             try {
                 const exist = await checkRestaurantExist(req.body.Name)
@@ -48,6 +51,7 @@ function restaurants() {
                 res.json({ status: "failed", data: "Something went wrong" })
             }
         },
+        // update restaurant address
         async updateRestaurant(req, res) {
             try {
                 const id = req.params.id
@@ -56,12 +60,13 @@ function restaurants() {
                 if (restaurant.nModified === 1) {
                     res.json({ status: 'Restaurant address updated succussfully', data: restaurant })
                 } else {
-                    res.json({ status: 'Restaurant not exist'})
+                    res.json({ status: 'Restaurant not exist' })
                 }
             } catch (e) {
                 res.json({ status: 'some thing went wrong', Error: e })
             }
         },
+        //delete a restaurant
         async deleteRestaurant(req, res) {
             try {
                 const id = req.params.id
