@@ -1,0 +1,424 @@
+define({ "api": [
+  {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./docs/main.js",
+    "group": "/home/programmer/Desktop/weeklyTasks/syncsite/syncsite/docs/main.js",
+    "groupTitle": "/home/programmer/Desktop/weeklyTasks/syncsite/syncsite/docs/main.js",
+    "name": ""
+  },
+  {
+    "type": "get",
+    "url": "/students",
+    "title": "get students details",
+    "name": "GetStudents",
+    "group": "Students",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "object[]",
+            "optional": false,
+            "field": "All",
+            "description": "<p>Student Details .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n  \"data\":[\n  {\n       \"_id\": \"60053c9f02c82058657eb4ff\",\n       \"Name\": \"Hashim\",\n       \"Register_Number\": 17050789,\n       \"Maths\": 58,\n       \"Science\": 55,\n       \"English\": 69,\n       \"Total\": 182,\n   },\n  ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/markList.js",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "post",
+    "url": "/addstudent",
+    "title": "",
+    "name": "Add_student_details",
+    "group": "Teacher",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": true,
+            "field": "Authorization",
+            "description": "<p>Jwt Token for Authorization</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Name",
+            "description": "<p>Name of student.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Register_Number",
+            "description": "<p>Register number of student.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Maths",
+            "description": "<p>score for Maths .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Science",
+            "description": "<p>score for Science.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "English",
+            "description": "<p>score for English.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "string",
+            "optional": false,
+            "field": "Student",
+            "description": "<p>added.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 201 OK\n{\n  \"result\": \"Student Added\",\n  \"data\": {\n   \"_id\": \"6005ab2ee61ea1ddad61a3f4\",\n   \"Name\": \"Hashim\",\n   \"Register_Number\": 17060789,\n   \"Maths\": 58,\n   \"Science\": 59,\n   \"English\": 60,\n   \"Total\": 177,\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Student",
+            "description": "<p>already exist.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 409 OK\n{\n  \"result\": \"Student already exist\",\n  \"data\": {\n   \"_id\": \"6005ab2ee61ea1ddad61a3f4\",\n   \"Name\": \"Hashim\",\n   \"Register_Number\": 17060789,\n   \"Maths\": 58,\n   \"Science\": 59,\n   \"English\": 60,\n   \"Total\": 177,\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/markList.js",
+    "groupTitle": "Teacher"
+  },
+  {
+    "type": "delete",
+    "url": "/deletestudent/:regNum",
+    "title": "",
+    "name": "Delete_student_details",
+    "group": "Teacher",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JwtToken</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "regNum",
+            "description": "<p>Register number of student.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "Student",
+            "description": "<p>details deleted.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "updated",
+            "description": "<p>list of student details.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n{\n \"result\": \"Student details deleted\",\n \"data\": {\n     \"n\": 1,\n     \"ok\": 1,\n     \"deletedCount\": 1\n     }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Student",
+            "description": "<p>not exist.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 OK\n{\n  \"result\": \"Student not exist\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/markList.js",
+    "groupTitle": "Teacher"
+  },
+  {
+    "type": "put",
+    "url": "/editStudent/:regNum",
+    "title": "",
+    "name": "Edit_student_details",
+    "group": "Teacher",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>JwtToken</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "regNum",
+            "description": "<p>Register number of student.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Maths",
+            "description": "<p>score for Maths .</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Science",
+            "description": "<p>score for Science.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "English",
+            "description": "<p>score for English.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "String",
+            "optional": false,
+            "field": "Student",
+            "description": "<p>details edited.</p>"
+          },
+          {
+            "group": "200",
+            "type": "Object",
+            "optional": false,
+            "field": "updated",
+            "description": "<p>list of student details.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n{\n \"result\": \"Student details edited\",\n \"data\": {\n     \"subjectOne\": 54,\n     \"subjectTwo\": 78,\n     \"subjectThree\": 87,\n     \"_id\": \"6003546c17aadfeba3cc8f06\",\n     \"name\": \"fsg\",\n     \"reg_No\": null,\n     \"total\": 534,\n     }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Student",
+            "description": "<p>not exist.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 OK\n{\n  \"result\": \"Student not exist\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/markList.js",
+    "groupTitle": "Teacher"
+  },
+  {
+    "type": "post",
+    "url": "/teacherlogin",
+    "title": "",
+    "name": "Teacher_login",
+    "group": "Teacher",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Email",
+            "description": "<p>email of Teacher to login (teacher@gmail.com).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "Password",
+            "description": "<p>password of teacher to login (1234).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>TUTOR LOGGED SUCCESSFULLY.</p>"
+          },
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>TOKEN.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 201 Created new student\n{\n  \"auth\": \"success\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InRlYWNoZXJAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjEwOTgzMDk1LCJleHAiOjE2MTEzNDMwOTV9._dAqRMGHPNy3EZPrNcfuDNSFNLQ0oij8ZcOZvm185XE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "incorrect",
+            "description": "<p>email or password.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Not Found\n{\n  \"auth\": \"failed\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./routes/markList.js",
+    "groupTitle": "Teacher"
+  }
+] });

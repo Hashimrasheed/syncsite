@@ -12,7 +12,6 @@ function teacherLogin(data) {
         Email : 'teacher@gmail.com',
         Password : '1234'
     }
-    
     if(data.Email == values.Email && data.Password == values.Password) {
         return {status: 'Login success', data: values}
     } else {

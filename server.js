@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
-const { USER_NAME, PASSWORD } = require('./config')
+const path = require('path')
+const { USER_NAME, PASSWORD, PORTNum } = require('./config')
 const markList = require('./routes/markList')
-const PORT = process.env.PORT || 3000
+const PORT = PORTNum || 3000
 
 const app = express();
 
 //database connection
-const url = 'mongodb://localhost:27017/MarkList';
-// `mongodb+srv://${USER_NAME}:${PASSWORD}@cluster0.wysex.mongodb.net/HalfwayTest?retryWrites=true&w=majority`
+const url = `mongodb+srv://${USER_NAME}:${PASSWORD}@cluster0.wysex.mongodb.net/syncsite?retryWrites=true&w=majority`;
 
 mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true });
 
@@ -21,12 +21,18 @@ connection.once('open', () => {
     console.log('Connection failed...');
 })
 
+//set static file
+app.use(express.static(path.join(__dirname, 'docs')))
+
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Routing
 app.use('/', markList);
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "docs/index.html"))
+})
 
 //port listening
 app.listen(PORT, () => {
