@@ -2,11 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 //Restaurant schema
-const restaurantSchema = new Schema({
-    name: {type: String, required: true},
-    location: {type: String, required: true},
-    cuisine: {type: String, required: true},
-    grade: {type: Number, required: true},
+const studentSchema = new Schema({
+    Name: {type: String, required: true},
+    Register_Number: {type: Number, required: true},
+    Maths: {type: Number, required: true},
+    Science: {type: Number, required: true},
+    English: {type: Number, required: true},
+    Total: {type: Number, required: true},
 })
 
-module.exports = mongoose.model('Restaurants', restaurantSchema)
+module.exports = mongoose.model('Student', studentSchema)

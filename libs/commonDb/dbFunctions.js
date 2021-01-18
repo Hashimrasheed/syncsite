@@ -1,82 +1,71 @@
-const { set } = require('mongoose')
-const Restaurant = require('../../app/models/restaurant')
+const Student = require('../../app/models/restaurant')
 
-//Get Restaurant
-function getRestaurants(limit) {
-    return Restaurant.aggregate([
-        {
-            $limit: limit
-        }
-    ])
+
+//Get All results
+function getAllResults() {
+    return Student.find()
 }
 
-// Get a restaurant details
-function getARestaurant(id) {
-    return Restaurant.findOne({_id: id})
-}
-
-// check restaurant exist
-function checkRestaurantExist(name) {
-    return Restaurant.findOne({name}) || null
-}
-
-// Create a restaurant
-function createRestaurant(restaurant) {
-    let res = {
-        name: restaurant.Name,
-        location: restaurant.Location,
-        cuisine: restaurant.cuisine,
-        grade: restaurant.grade,
+//Teacher login
+function teacherLogin(data) {
+    const values = {
+        Email : 'teacher@gmail.com',
+        Password : '1234'
     }
-    return Restaurant.insertMany(res)
+    
+    if(data.Email == values.Email && data.Password == values.Password) {
+        return {status: 'Login success', data: values}
+    } else {
+        return {status: "Login failed", data: null}
+    }
 }
 
-// update restaurant address
-function updateRestaurant(id, address) {
-    return Restaurant.updateOne({_id: id}, {location: address})
+//Add student
+function addStudent(data) {
+    let student = new Student({
+        Name: data.Name,
+        Register_Number: data.Register_Number,
+        Maths: data.Maths || 0,
+        Science: data.Science || 0,
+        English: data.English || 0,
+        Total : Number(data.Maths + data.Science + data.English)
+    })
+    return student.save()
 }
 
-//delete a restaurant
-function deleteRestaurant(id) {
-    return Restaurant.deleteOne({_id: id})
-}
-
-//get Restaurant grade
-function getrestaurantgrade(id) {
-    return Restaurant.findById(id)
-}
-
-//get All unique restaurant cuisines
-function getrestaurantCuisines() {
-    return Restaurant.aggregate([
+//Check Student Exist
+function CheckStudentExist(regNum) {
+    return Student.aggregate([
         {
-            $group: {_id: "$cuisine"}
+            $match: {Register_Number: Number(regNum)}
         }
     ])
 }
 
-// Get all restaurants under a cuisine
-function restaurantsInCuisines(cuisine) {
-    return Restaurant.aggregate([
-        {
-            $match: {cuisine: cuisine}
-        },
-        {
-            $project: {name: 1, _id: 0}
-        }
-    ])
+//Edit Student
+function editStudent(data, regNum) {
+    let student = {
+        Maths: data.Maths || 0,
+        Science: data.Science || 0,
+        English: data.English || 0,
+        Total : Number(data.Maths + data.Science + data.English)
+    }
+    return Student.updateOne({Register_Number: regNum}, {$set: student})
+
+}
+
+//delete Student
+function deleteStudent(regNum) {
+    return Student.deleteOne({Register_Number: regNum})
 }
 
 
 //Export db functions
 module.exports = {
-    getRestaurants,
-    getARestaurant,
-    createRestaurant,
-    updateRestaurant,
-    checkRestaurantExist,
-    deleteRestaurant,
-    getrestaurantgrade,
-    getrestaurantCuisines,
-    restaurantsInCuisines
+    teacherLogin,
+    addStudent,
+    CheckStudentExist,
+    editStudent,
+    deleteStudent,
+    getAllResults
 }
